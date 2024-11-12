@@ -10,11 +10,12 @@ export default function Contact(){
 
 
       return(
-        <ContactForm
-        title="Get in Touch"
-        subtitle="We are here to help you."
-        contactInfo={contactInfo}
-      />          
+      //   <ContactForm
+      //   title="Get in Touch"
+      //   subtitle="We are here to help you."
+      //   contactInfo={contactInfo}
+      // />
+      console.log("yo")          
     );
 }
 
