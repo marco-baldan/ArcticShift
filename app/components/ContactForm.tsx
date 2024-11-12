@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
 type ContactInfo = {
   email: string;
@@ -24,37 +24,41 @@ const ContactForm: React.FC<ContactProps> = ({
     email: '',
     message: ''
   });
-  // const [errors, setErrors] = useState<Record<string, string>>({});
-
-  // const validateForm = () => {
-  //   let isValid = true;
-  //   const newErrors: Record<string, string> = {};
-
-  //   if (!formData.name) {
-  //     newErrors.name = 'Name is required';
-  //     isValid = false;
-  //   }
-
-  //   if (!formData.email) {
-  //     newErrors.email = 'Email is required';
-  //     isValid = false;
-  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-  //     newErrors.email = 'Email address is invalid';
-  //     isValid = false;
-  //   }
-
-  //   if (!formData.message) {
-  //     newErrors.message = 'Message is required';
-  //     isValid = false;
-  //   }
-
-  //   setErrors(newErrors);
-  //   return isValid;
-  // };
+  const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus('pending');
+    setError(null);
+
+    try {
+      const form = e.target as HTMLFormElement;
+      const formData = new FormData(form);
+      
+      // Send the form data to Netlify’s form handling endpoint
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' }); // Clear form after submission
+      } else {
+        setStatus('error');
+        setError(`Submission failed: ${response.statusText}`);
+      }
+    } catch (error) {
+      setStatus('error');
+      setError(`Submission error: ${error.message}`);
+    }
   };
 
   return (
@@ -68,6 +72,7 @@ const ContactForm: React.FC<ContactProps> = ({
             method="POST"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
             className="space-y-6"
           >
             <input type="hidden" name="form-name" value="contact" />
@@ -84,8 +89,8 @@ const ContactForm: React.FC<ContactProps> = ({
                 className="input input-bordered w-full text-base-content"
                 value={formData.name}
                 onChange={handleChange}
+                required
               />
-              {/* {errors.name && <span className="text-error text-sm">{errors.name}</span>} */}
             </div>
 
             <div className="form-control w-full">
@@ -99,8 +104,8 @@ const ContactForm: React.FC<ContactProps> = ({
                 className="input input-bordered w-full text-base-content"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
-              {/* {errors.email && <span className="text-error text-sm">{errors.email}</span>} */}
             </div>
 
             <div className="form-control w-full">
@@ -113,13 +118,26 @@ const ContactForm: React.FC<ContactProps> = ({
                 className="textarea textarea-bordered w-full text-base-content"
                 value={formData.message}
                 onChange={handleChange}
+                required
               ></textarea>
-              {/* {errors.message && <span className="text-error text-sm">{errors.message}</span>} */}
             </div>
 
             <div className="flex justify-end">
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <button type="submit" className="btn btn-primary" disabled={status === 'pending'}>
+                {status === 'pending' ? 'Submitting...' : 'Submit'}
+              </button>
             </div>
+            
+            {status === 'success' && (
+              <div className="alert alert-success mt-4">
+                <span>Thank you for reaching out! We’ll get back to you soon.</span>
+              </div>
+            )}
+            {status === 'error' && (
+              <div className="alert alert-error mt-4">
+                <span>{error || 'An error occurred while submitting the form.'}</span>
+              </div>
+            )}
           </form>
         </div>
 
