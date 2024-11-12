@@ -20,11 +20,6 @@ const aboutUsContent = {
     imageSrc: '/images/hero1.jpg',
 
 }
-const contactInfo = {
-    email: 'marco.baldan@hotmail.com',
-    phone: '+44 (0) 7577717604',
-    address: '39 Wellow Drive, Frome, Somerset'
-  };
   const categories = [
     {
       title: "Our Tech Stack",
