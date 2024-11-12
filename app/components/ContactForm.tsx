@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 type ContactInfo = {
   email: string;
@@ -57,14 +57,6 @@ const ContactForm: React.FC<ContactProps> = ({
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      console.log('Form submitted:', formData);
-      setFormData({ name: '', email: '', message: '' });
-    }
-  };
-
   return (
     <div className="w-full py-10 flex justify-center">
       <div className="container grid gap-8 px-6 md:grid-cols-3 md:px-8">
@@ -72,7 +64,6 @@ const ContactForm: React.FC<ContactProps> = ({
           <h1 className="text-3xl font-bold text-base-content">{title}</h1>
           <p className="text-base-content/70">{subtitle}</p>
           <form
-            onSubmit={handleSubmit}
             name="contact"
             method="POST"
             data-netlify="true"
@@ -80,6 +71,7 @@ const ContactForm: React.FC<ContactProps> = ({
             className="space-y-6"
           >
             <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="bot-field" />
 
             <div className="form-control w-full">
               <label className="label">
