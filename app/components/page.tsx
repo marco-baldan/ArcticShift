@@ -5,7 +5,6 @@ import ProcessSection from './ProcessSection';
 import TechStack from './TechStack';
 import FeaturesSection from './FeaturesSection';
 import FeaturesSectionWithButton from './FeaturesSectionWithButton';
-import ContactForm from './ContactForm';
 import DynamicTestimonials from './Testimonials';
 export default function Components() {
 
@@ -180,11 +179,7 @@ return(
         title="Our Features" 
         description="We provide cutting-edge features to bring the best user experience." 
       />
-    <ContactForm
-      title="Get in Touch"
-      subtitle="We are here to help you."
-      contactInfo={contactInfo}
-    />
+    
         <DynamicTestimonials />
     </>      
 
