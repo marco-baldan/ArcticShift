@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from 'next/image';
 
 interface AboutUsProps {
   title: string;
@@ -24,7 +25,7 @@ const AboutUs: FC<AboutUsProps> = ({
       >
         {imageSrc && (
           <div className="w-full md:w-1/2">
-            <img src={imageSrc} alt="About us" className="rounded-lg shadow-lg" />
+            <Image src={imageSrc} alt="About us" className="rounded-lg shadow-lg" />
           </div>
         )}
         <div className="w-full md:w-1/2">

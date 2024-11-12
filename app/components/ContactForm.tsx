@@ -26,31 +26,31 @@ const ContactForm: React.FC<ContactProps> = ({
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors: Record<string, string> = {};
+  // const validateForm = () => {
+  //   let isValid = true;
+  //   const newErrors: Record<string, string> = {};
 
-    if (!formData.name) {
-      newErrors.name = 'Name is required';
-      isValid = false;
-    }
+  //   if (!formData.name) {
+  //     newErrors.name = 'Name is required';
+  //     isValid = false;
+  //   }
 
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email address is invalid';
-      isValid = false;
-    }
+  //   if (!formData.email) {
+  //     newErrors.email = 'Email is required';
+  //     isValid = false;
+  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+  //     newErrors.email = 'Email address is invalid';
+  //     isValid = false;
+  //   }
 
-    if (!formData.message) {
-      newErrors.message = 'Message is required';
-      isValid = false;
-    }
+  //   if (!formData.message) {
+  //     newErrors.message = 'Message is required';
+  //     isValid = false;
+  //   }
 
-    setErrors(newErrors);
-    return isValid;
-  };
+  //   setErrors(newErrors);
+  //   return isValid;
+  // };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
