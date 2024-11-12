@@ -24,7 +24,7 @@ const ContactForm: React.FC<ContactProps> = ({
     email: '',
     message: ''
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  // const [errors, setErrors] = useState<Record<string, string>>({});
 
   // const validateForm = () => {
   //   let isValid = true;
@@ -85,7 +85,7 @@ const ContactForm: React.FC<ContactProps> = ({
                 value={formData.name}
                 onChange={handleChange}
               />
-              {errors.name && <span className="text-error text-sm">{errors.name}</span>}
+              {/* {errors.name && <span className="text-error text-sm">{errors.name}</span>} */}
             </div>
 
             <div className="form-control w-full">
@@ -100,7 +100,7 @@ const ContactForm: React.FC<ContactProps> = ({
                 value={formData.email}
                 onChange={handleChange}
               />
-              {errors.email && <span className="text-error text-sm">{errors.email}</span>}
+              {/* {errors.email && <span className="text-error text-sm">{errors.email}</span>} */}
             </div>
 
             <div className="form-control w-full">
@@ -114,7 +114,7 @@ const ContactForm: React.FC<ContactProps> = ({
                 value={formData.message}
                 onChange={handleChange}
               ></textarea>
-              {errors.message && <span className="text-error text-sm">{errors.message}</span>}
+              {/* {errors.message && <span className="text-error text-sm">{errors.message}</span>} */}
             </div>
 
             <div className="flex justify-end">
