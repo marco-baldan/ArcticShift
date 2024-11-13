@@ -33,13 +33,16 @@ export default function ContactPage() {
     setError(null);
 
     try {
-      const form = e.target as HTMLFormElement;
-      const formData = new FormData(form);
+      const myForm = e.target as HTMLFormElement;
+      const formData = new FormData(myForm);
+
+      // Convert FormData to URLSearchParams for proper form submission
+      const body = new URLSearchParams(Array.from(formData.entries()) as [string, string][]).toString();
 
       const response = await fetch('/__forms.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(Array.from(formData.entries()) as [string, string][]).toString(),
+        body,
       });
 
       if (response.ok) {
@@ -69,8 +72,11 @@ export default function ContactPage() {
             onSubmit={handleSubmit}
             className="space-y-6"
           >
+            {/* Hidden inputs for Netlify form handling */}
             <input type="hidden" name="form-name" value="contact" />
             <input type="hidden" name="bot-field" />
+
+            {/* Form fields */}
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text text-base-content">Your Name</span>
