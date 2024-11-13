@@ -60,7 +60,7 @@ export default function ContactPage() {
       <div className="container grid gap-8 px-6 md:grid-cols-3 md:px-8">
         <div className="md:col-span-2 space-y-6">
           <h1 className="text-3xl font-bold text-base-content">Contact Us</h1>
-          <p className="text-base-content/70">We'll get back to you as soon as possible.</p>
+          <p className="text-base-content/70">We&apos;ll get back to you as soon as possible.</p>
           <form
             name="contact"
             method="POST"
