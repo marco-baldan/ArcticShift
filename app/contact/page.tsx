@@ -13,12 +13,16 @@ export default function ContactPage() {
 
     try {
       const form = e.currentTarget
-      const data = new FormData(form)
+      const formData = new FormData(form)
+      const data: Record<string, string> = {}
+      formData.forEach((value, key) => {
+        data[key] = value.toString()
+      })
 
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data as any).toString(),
+        body: new URLSearchParams(data).toString(),
       })
 
       if (response.ok) {
@@ -38,7 +42,7 @@ export default function ContactPage() {
     <div className="w-full py-10 flex justify-center">
       <div className="container px-6 md:px-8">
         <h1 className="text-3xl font-bold text-base-content mb-6">Contact Us</h1>
-        <p className="text-base-content/70 mb-8">We'll get back to you as soon as possible.</p>
+        <p className="text-base-content/70 mb-8">We&apos;ll get back to you as soon as possible.</p>
         
         <form
           name="contact"
@@ -102,7 +106,7 @@ export default function ContactPage() {
 
           {status === 'success' && (
             <div className="alert alert-success mt-4">
-              <span>Thank you for reaching out! We'll get back to you soon.</span>
+              <span>Thank you for reaching out! We&apos;ll get back to you soon.</span>
             </div>
           )}
           {status === 'error' && (
