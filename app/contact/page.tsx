@@ -14,6 +14,7 @@ const ContactForm: React.FC<ContactProps> = ({
   title = 'Contact Us',
   subtitle = "We'll get back to you as soon as possible.",
   contactInfo,
+  
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -48,9 +49,10 @@ const ContactForm: React.FC<ContactProps> = ({
         setError(`Submission failed: ${response.statusText}`);
       }
     } catch (error) {
-      setStatus('error');
+      if (error instanceof Error){
+        setStatus('error');
       setError(`Submission error: ${error.message}`);
-    }
+      }}
   };
   return (
     <div className="w-full py-10 flex justify-center">
