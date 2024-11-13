@@ -7,4 +7,5 @@
   
 [build.environment]
   NODE_VERSION = "18.18.0"
-  
+  NEXT_USE_NETLIFY_EDGE = "true"
+  NEXT_USE_NETLIFY_FORMS = "true"

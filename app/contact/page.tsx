@@ -13,16 +13,12 @@ export default function ContactPage() {
 
     try {
       const form = e.currentTarget
-      const formData = new FormData(form)
-      const data: Record<string, string> = {}
-      formData.forEach((value, key) => {
-        data[key] = value.toString()
-      })
+      const data = new FormData(form)
 
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data).toString(),
+        body: new URLSearchParams(data as any).toString(),
       })
 
       if (response.ok) {
@@ -48,7 +44,7 @@ export default function ContactPage() {
           name="contact"
           method="POST"
           data-netlify="true"
-          data-netlify-honeypot="bot-field"
+          netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
           className="space-y-6 max-w-md"
         >
