@@ -7,17 +7,13 @@ type ContactInfo = {
   address: string;
 };
 
-type ContactProps = {
-  title?: string;
-  subtitle?: string;
-  contactInfo?: ContactInfo; // Make it optional
+const contactInfo: ContactInfo = {
+  email: 'contact@example.com',
+  phone: '123-456-7890',
+  address: '123 Main St, Anytown, USA',
 };
 
-const ContactForm: React.FC<ContactProps> = ({
-  title = 'Contact Us',
-  subtitle = "We'll get back to you as soon as possible.",
-  contactInfo = { email: '', phone: '', address: '' }, // Default value
-}) => {
+export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -63,8 +59,8 @@ const ContactForm: React.FC<ContactProps> = ({
     <div className="w-full py-10 flex justify-center">
       <div className="container grid gap-8 px-6 md:grid-cols-3 md:px-8">
         <div className="md:col-span-2 space-y-6">
-          <h1 className="text-3xl font-bold text-base-content">{title}</h1>
-          <p className="text-base-content/70">{subtitle}</p>
+          <h1 className="text-3xl font-bold text-base-content">Contact Us</h1>
+          <p className="text-base-content/70">We'll get back to you as soon as possible.</p>
           <form
             name="contact"
             method="POST"
@@ -149,7 +145,7 @@ const ContactForm: React.FC<ContactProps> = ({
       </div>
     </div>
   );
-};
+}
 
 function SuccessIcon() {
   return (
@@ -166,5 +162,3 @@ function ErrorIcon() {
     </svg>
   );
 }
-
-export default ContactForm;
