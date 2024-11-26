@@ -2,16 +2,23 @@ import { Breadcrumbs } from '@/app/components/Breadcrumbs'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
+interface BlogPost {
+  title: string;
+  content: string;
+  date: string;
+  author: string;
+  coverImage: string;
+}
+
 interface PageProps {
   params: {
     slug: string;
   };
 }
 
-// This would typically come from a database or CMS based on the slug
-const getBlogPost = (slug: string) => {
+const getBlogPost = (slug: string): BlogPost | null => {
   // Simulating a database lookup
-  const posts = {
+  const posts: Record<string, BlogPost> = {
 'getting-started-with-nextjs': {
     title: 'Getting Started with Next.js',
     content: `
@@ -110,6 +117,7 @@ export default function BlogPost({ params }: PageProps) {
   if (!post) {
     notFound();
   }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Breadcrumbs items={[
@@ -133,4 +141,3 @@ export default function BlogPost({ params }: PageProps) {
     </div>
   )
 }
-

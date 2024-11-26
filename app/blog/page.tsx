@@ -2,7 +2,16 @@ import { Breadcrumbs } from '@/app/components/Breadcrumbs'
 import { BlogPostPreview } from '@/app/components/BlogPostPreview'
 import { CTA } from '../components/CTA'
 
-const blogPosts = [
+interface BlogPostPreviewData {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: string;
+  coverImage: string;
+}
+
+const blogPosts: BlogPostPreviewData[] = [
   {
     slug: 'getting-started-with-nextjs',
     title: 'Getting Started with Next.js',
@@ -45,14 +54,8 @@ const blogPosts = [
   }
 ]
 
-export default function BlogPage({ params }: { params: { slug: string } })  {
-  const post = blogPosts.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    return <div>Post not found</div>;
-  }
+export default function BlogPage() {
   return (
-    <>
     <div className="container mx-auto px-4 py-8">
       <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }]} />
       <h1 className="text-4xl font-bold mt-8 mb-12">Our Blog</h1>
@@ -63,6 +66,6 @@ export default function BlogPage({ params }: { params: { slug: string } })  {
       </div>
       <CTA />
     </div>
-    </>  )
+  )
 }
 
