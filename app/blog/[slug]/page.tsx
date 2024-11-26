@@ -99,16 +99,11 @@ const getBlogPost = (slug: string) => {
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
-  if (!params.slug) {
-    notFound()
-  }
-
-  const post = getBlogPost(params.slug)
+  const post = getBlogPost(params.slug);
 
   if (!post) {
-    notFound()
+    notFound();
   }
-
   return (
     <div className="container mx-auto px-4 py-8">
       <Breadcrumbs items={[
