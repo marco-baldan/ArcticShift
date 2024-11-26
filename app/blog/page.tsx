@@ -2,7 +2,6 @@ import { Breadcrumbs } from '@/app/components/Breadcrumbs'
 import { BlogPostPreview } from '@/app/components/BlogPostPreview'
 import { CTA } from '../components/CTA'
 
-// This would typically come from a database or CMS
 const blogPosts = [
   {
     slug: 'getting-started-with-nextjs',
@@ -46,7 +45,12 @@ const blogPosts = [
   }
 ]
 
-export default function BlogPage() {
+export default function BlogPage({ params }: { params: { slug: string } })  {
+  const post = blogPosts.find((p) => p.slug === params.slug);
+
+  if (!post) {
+    return <div>Post not found</div>;
+  }
   return (
     <>
     <div className="container mx-auto px-4 py-8">
