@@ -1,7 +1,6 @@
-import { Breadcrumbs } from '@/app/components/Breadcrumbs'
-import Image from 'next/image'
-import { notFound } from 'next/navigation'
-
+import { Breadcrumbs } from "@/app/components/Breadcrumbs";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
 interface BlogPost {
   title: string;
@@ -11,16 +10,10 @@ interface BlogPost {
   coverImage: string;
 }
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
 const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
   const posts: Record<string, BlogPost> = {
-    'getting-started-with-nextjs': {
-      title: 'Getting Started with Next.js',
+    "getting-started-with-nextjs": {
+      title: "Getting Started with Next.js",
       content: `
         <p>Next.js is a powerful React framework that allows you to build fast, efficient, and SEO-friendly websites.</p>
         <h2>Key Features</h2>
@@ -32,12 +25,13 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
         </ul>
         <p>Get started today and elevate your web projects with Next.js.</p>
       `,
-      date: '2023-03-10',
-      author: 'Marco Baldan',
-      coverImage: '/images/hero1.jpg?height=400&width=800',
+      date: "2023-03-10",
+      author: "Marco Baldan",
+      coverImage: "/images/hero1.jpg?height=400&width=800",
     },
-    'wordpress-vs-shopify': {
-      title: 'WordPress vs Shopify: Choosing the Right Platform for Your Business',
+    "wordpress-vs-shopify": {
+      title:
+        "WordPress vs Shopify: Choosing the Right Platform for Your Business",
       content: `
         <p>Choosing the right platform for your e-commerce site can be challenging. In this post, we'll compare WordPress and Shopify to help you make an informed decision.</p>
         <h2>WordPress</h2>
@@ -54,12 +48,12 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
         </ul>
         <p>Evaluate your business needs to choose the platform that suits you best.</p>
       `,
-      date: '2023-04-05',
-      author: 'Marco Baldan',
-      coverImage: '/images/hero1.jpg?height=400&width=800',
+      date: "2023-04-05",
+      author: "Marco Baldan",
+      coverImage: "/images/hero1.jpg?height=400&width=800",
     },
-    'top-5-seo-tips': {
-      title: 'Top 5 SEO Tips to Boost Your Website Rankings in 2023',
+    "top-5-seo-tips": {
+      title: "Top 5 SEO Tips to Boost Your Website Rankings in 2023",
       content: `
         <p>Search Engine Optimisation (SEO) is essential for improving your site's visibility. Here are five key tips for success:</p>
         <ul>
@@ -71,12 +65,12 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
         </ul>
         <p>Implement these strategies to see significant improvements in your search engine rankings.</p>
       `,
-      date: '2023-02-20',
-      author: 'Marco Baldan',
-      coverImage: '/images/hero1.jpg?height=400&width=800',
+      date: "2023-02-20",
+      author: "Marco Baldan",
+      coverImage: "/images/hero1.jpg?height=400&width=800",
     },
-    'maximising-conversions-digital-marketing': {
-      title: 'Maximising Conversions with Digital Marketing in 2023',
+    "maximising-conversions-digital-marketing": {
+      title: "Maximising Conversions with Digital Marketing in 2023",
       content: `
         <p>Driving traffic to your website is just the first step. To maximise conversions, focus on:</p>
         <ul>
@@ -87,12 +81,12 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
         </ul>
         <p>By aligning your digital marketing efforts with customer needs, you can turn traffic into tangible results.</p>
       `,
-      date: '2023-01-15',
-      author: 'Marco Baldan',
-      coverImage: '/images/hero1.jpg?height=400&width=800',
+      date: "2023-01-15",
+      author: "Marco Baldan",
+      coverImage: "/images/hero1.jpg?height=400&width=800",
     },
-    'nextjs-seo-strategies': {
-      title: 'Next.js SEO Strategies for Lightning-Fast Websites',
+    "nextjs-seo-strategies": {
+      title: "Next.js SEO Strategies for Lightning-Fast Websites",
       content: `
         <p>Next.js combines performance with SEO best practices. Here’s how you can use it to optimise your website:</p>
         <ul>
@@ -103,28 +97,35 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
         </ul>
         <p>With Next.js, you can create sites that not only look great but also rank higher in search engines.</p>
       `,
-      date: '2023-03-28',
-      author: 'Marco Baldan',
-      coverImage: '/images/hero1.jpg?height=400&width=800',
+      date: "2023-03-28",
+      author: "Marco Baldan",
+      coverImage: "/images/hero1.jpg?height=400&width=800",
     },
   };
 
   return new Promise((resolve) => {
-    setTimeout(() => resolve(posts[slug] || null), 500);
+    setTimeout(() => {
+      resolve(posts[slug] || null);
+    }, 500); // Simulated delay
   });
 };
-export default async function BlogPost({ params }: PageProps) {
-  const { slug } = params;
 
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // Awaiting params before accessing 'slug'
   const post = await getBlogPost(slug);
 
   if (!post) {
-    notFound();
+    return notFound();
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: post.title, href: `/blog/${params.slug}` }]} />
+      <Breadcrumbs
+        items={[
+          { label: "Blog", href: "/blog" },
+          { label: post.title, href: `/blog/${slug}` },
+        ]}
+      />
       <article className="mt-8">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
         <div className="text-sm text-base-content/70 mb-6">
@@ -138,7 +139,10 @@ export default async function BlogPost({ params }: PageProps) {
           className="w-full h-96 object-cover rounded-lg mb-8"
           priority
         />
-        <div className="prose lg:prose-xl" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div
+          className="prose lg:prose-xl"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </article>
     </div>
   );
