@@ -17,7 +17,7 @@ interface FeaturesSectionWithButtonProps {
 
 const FeaturesSectionWithButton: FC<FeaturesSectionWithButtonProps> = ({ features, title, description }) => {
   return (
-    <section className="bg-base-300 py-16 md:py-24">
+    <section className="py-16 md:py-24">
       <div className="container mx-auto text-center px-4 md:px-8">
         {title && <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">{title}</h2>}
         {description && <p className="text-base md:text-lg text-base-content mb-12">{description}</p>}

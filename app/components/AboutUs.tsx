@@ -25,7 +25,7 @@ const AboutUs: FC<AboutUsProps> = ({
       >
         {imageSrc && (
           <div className="w-full md:w-1/2">
-            <Image src={imageSrc} alt="About us" className="rounded-lg shadow-lg" />
+            <Image src={imageSrc} alt="About us" className="rounded-lg shadow-lg" width={500} height={500} />
           </div>
         )}
         <div className="w-full md:w-1/2">

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { Breadcrumbs } from '@/app/components/Breadcrumbs';
 
 type ContactInfo = {
   email: string;
@@ -59,7 +60,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="w-full py-10 flex justify-center">
+
+    <div className="container mx-auto px-4 py-8">
+    <Breadcrumbs items={[{ label: 'Contact', href: '/contact' }]} />
+        <div className="w-full py-10 flex justify-center">    
+
       <div className="container grid gap-8 px-6 md:grid-cols-3 md:px-8">
         <div className="md:col-span-2 space-y-6">
           <h1 className="text-3xl font-bold text-base-content">Contact Us</h1>
@@ -149,6 +154,7 @@ export default function ContactPage() {
           <p className="text-base-content">{contactInfo.address}</p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

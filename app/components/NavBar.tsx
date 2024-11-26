@@ -38,11 +38,11 @@ const NavBar = () => {
     { label: 'Home', href: '/' },
     {
       label: 'Services',
-      href: '/services',
+      href: '#',
       dropdown: [
-        { label: 'Web Development', href: '/services/web-development' },
-        { label: 'SEO', href: '/services/seo' },
-        { label: 'Marketing', href: '/services/marketing' },
+        { label: 'Web Development', href: '/web-development' },
+        { label: 'SEO', href: '/seo' },
+        { label: 'Digital Marketing', href: '/digital-marketing' },
       ],
     },
     { label: 'Work', href: '/work' },

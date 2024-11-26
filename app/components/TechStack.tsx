@@ -16,7 +16,7 @@ interface TechStackProps {
 
 const TechStack: FC<TechStackProps> = ({ categories }) => {
   return (
-      <div className="w-full md:w-1/2 p-2">
+      <div className="w-full md:w-1/2 p-2 inline">
         <div className="mockup-code">
           {categories.map((category, idx) => (
             <div key={idx}>

@@ -65,7 +65,7 @@ export default function DynamicTestimonials() {
   }, [nextTestimonial]);
 
   return (
-    <div className="bg-base-200 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12 text-base-content">What Our Clients Say</h2>
         <div className="card bg-base-100 shadow-xl overflow-hidden">

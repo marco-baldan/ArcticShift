@@ -34,7 +34,7 @@ export default {
   plugins: [require('daisyui')],
   daisyui: {
     themes: [
-      "forest",
-      "lofi",],
+      "lofi",
+    "forest",],
   },
 } satisfies Config;
