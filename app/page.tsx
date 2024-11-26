@@ -1,7 +1,6 @@
 import { FaDesktop, FaSearch, FaBullhorn, FaChartLine } from "react-icons/fa";
 import FeaturesSectionWithButton from "./components/FeaturesSectionWithButton";
 import HeroType2 from "./components/HeroType2";
-import { AnimatedCounter } from "./components/AnimatedCounter";
 import DynamicTestimonials from "./components/Testimonials";
 import { CTA } from "./components/CTA";
 
