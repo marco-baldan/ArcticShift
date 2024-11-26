@@ -2,6 +2,12 @@ import { Breadcrumbs } from '@/app/components/Breadcrumbs'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
 // This would typically come from a database or CMS based on the slug
 const getBlogPost = (slug: string) => {
   // Simulating a database lookup
@@ -98,7 +104,7 @@ const getBlogPost = (slug: string) => {
   return posts[slug as keyof typeof posts] || null
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default function BlogPost({ params }: PageProps) {
   const post = getBlogPost(params.slug);
 
   if (!post) {
