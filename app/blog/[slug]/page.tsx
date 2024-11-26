@@ -34,7 +34,7 @@ const getBlogPost = (slug: string): BlogPost | null => {
     `,
     date: '2023-03-10',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=400&width=800'
+    coverImage: '/images/hero1.jpg?height=400&width=800'
   },
   'wordpress-vs-shopify': {
     title: 'WordPress vs Shopify: Choosing the Right Platform for Your Business',
@@ -56,7 +56,7 @@ const getBlogPost = (slug: string): BlogPost | null => {
     `,
     date: '2023-04-05',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=400&width=800'
+    coverImage: '/images/hero1.jpg?height=400&width=800'
   },
   'top-5-seo-tips': {
     title: 'Top 5 SEO Tips to Boost Your Website Rankings in 2023',
@@ -73,7 +73,7 @@ const getBlogPost = (slug: string): BlogPost | null => {
     `,
     date: '2023-02-20',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=400&width=800'
+    coverImage: '/images/hero1.jpg?height=400&width=800'
   },
   'maximising-conversions-digital-marketing': {
     title: 'Maximising Conversions with Digital Marketing in 2023',
@@ -89,7 +89,7 @@ const getBlogPost = (slug: string): BlogPost | null => {
     `,
     date: '2023-01-15',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=400&width=800'
+    coverImage: '/images/hero1.jpg?height=400&width=800'
   },
   'nextjs-seo-strategies': {
     title: 'Next.js SEO Strategies for Lightning-Fast Websites',
@@ -105,7 +105,7 @@ const getBlogPost = (slug: string): BlogPost | null => {
     `,
     date: '2023-03-28',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=400&width=800'
+    coverImage: '/images/hero1.jpg?height=400&width=800'
   }
   }
   return posts[slug as keyof typeof posts] || null

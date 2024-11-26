@@ -18,7 +18,7 @@ const blogPosts: BlogPostPreviewData[] = [
     excerpt: 'Learn how to build fast and efficient web applications with Next.js, the React framework for production.',
     date: '2023-03-10',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=250&width=400'
+    coverImage: '/images/hero1.jpg?height=250&width=400'
   },
   {
     slug: 'wordpress-vs-shopify',
@@ -26,7 +26,7 @@ const blogPosts: BlogPostPreviewData[] = [
     excerpt: 'Explore the pros and cons of WordPress and Shopify to decide which is best for your e-commerce needs.',
     date: '2023-04-05',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=250&width=400'
+    coverImage: '/images/hero1.jpg?height=250&width=400'
   },
   {
     slug: 'top-5-seo-tips',
@@ -34,7 +34,7 @@ const blogPosts: BlogPostPreviewData[] = [
     excerpt: 'Uncover actionable SEO strategies that will help your site rank higher in search engine results.',
     date: '2023-02-20',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=250&width=400'
+    coverImage: '/images/hero1.jpg?height=250&width=400'
   },
   {
     slug: 'maximising-conversions-digital-marketing',
@@ -42,7 +42,7 @@ const blogPosts: BlogPostPreviewData[] = [
     excerpt: 'Learn how to optimise your digital marketing campaigns to drive traffic and convert visitors into customers.',
     date: '2023-01-15',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=250&width=400'
+    coverImage: '/images/hero1.jpg?height=250&width=400'
   },
   {
     slug: 'nextjs-seo-strategies',
@@ -50,7 +50,7 @@ const blogPosts: BlogPostPreviewData[] = [
     excerpt: 'Discover how Next.js enhances SEO and helps you achieve better rankings with its modern features.',
     date: '2023-03-28',
     author: 'Marco Baldan',
-    coverImage: '/placeholder.svg?height=250&width=400'
+    coverImage: '/images/hero1.jpg?height=250&width=400'
   }
 ]
 
