@@ -1,4 +1,5 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+"use client"
+  import React, { FC, useState, useEffect, useRef } from 'react';
 
 // Predefined tech stack data
 const techStack = [
