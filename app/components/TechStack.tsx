@@ -143,7 +143,6 @@ const TechStack: FC<TechStackProps> = ({
 
   // Use RAF for smooth animations
   const requestRef = useRef<number>();
-  const previousTimeRef = useRef<number>();
 
   const scrollToBottom = useCallback(() => {
     if (containerRef.current) {
