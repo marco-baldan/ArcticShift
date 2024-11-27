@@ -8,39 +8,7 @@ import { CTA } from "../components/CTA";
 
 export default function WebDevelopmentPage() {
 
-    const categories = [
-        {
-          title: "Our Tech Stack",
-          items: [
-            { prefix: "🚀", name: "Next.js" },
-            { prefix: "⚛️", name: "React.js" },
-            { prefix: "🌐", name: "Express.js" },
-            { prefix: "🖥️", name: "Node.js" },
-            { prefix: "🐍", name: "Python" },
-            { prefix: "☁️", name: "AWS" },
-            { prefix: "☁️", name: "Google Cloud" },
-            { prefix: "📊", name: "MongoDB" },
-          ],
-        },
-        {
-          title: "Content Platforms",
-          items: [
-            { prefix: "🌐", name: "WordPress" },
-            { prefix: "🛒", name: "Shopify" },
-            { prefix: "📄", name: "Contentful" },
-            { prefix: "💻", name: "Webflow" },
-          ],
-        },
-        {
-          title: "Marketing & Creative Tools",
-          items: [
-            { prefix: "📈", name: "HubSpot & CRM Integrations" },
-            { prefix: "📈", name: "Google Analytics & SEO Tools" },
-            { prefix: "💼", name: "Marketing Automation" },
-            { prefix: "🎨", name: "Adobe Creative Suite" },
-          ],
-        },
-      ];
+    
       const featuresList = [
         {
           icon: <FaDesktop className="text-primary text-3xl md:text-4xl" />,
@@ -123,7 +91,7 @@ export default function WebDevelopmentPage() {
             link2="/blog"
         />
         <FeaturesSection features={featuresList} />
-        <TechStack categories={categories} />
+        <TechStack />
         <PortfolioGallery projects={projects}/>
         <CTA />
         </div>
