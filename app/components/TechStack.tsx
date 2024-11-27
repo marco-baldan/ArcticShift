@@ -1,10 +1,11 @@
 "use client"
-  import React, { FC, useState, useEffect, useRef } from 'react';
+
+import React, { FC, useState, useEffect, useRef, useCallback } from 'react';
 
 // Predefined tech stack data
 const techStack = [
   {
-    title: '🚀 Core Technologies',
+    title: 'Core Technologies',
     items: [
       { 
         prefix: '➜', 
@@ -103,7 +104,7 @@ const techStack = [
       }
     ]
   }
-];
+] as const;
 
 interface TechStackItem {
   prefix: string;
@@ -120,14 +121,15 @@ interface TechStackProps {
   categories?: TechCategory[];
   typingSpeed?: number;
   delayBetweenCategories?: number;
+  className?: string;
 }
 
 const TechStack: FC<TechStackProps> = ({ 
   categories = [], 
   typingSpeed = 50, 
-  delayBetweenCategories = 1000 
+  delayBetweenCategories = 1000,
+  className
 }) => {
-  // Use the predefined tech stack if no categories are passed
   const effectiveCategories = categories.length > 0 ? categories : techStack;
   
   const [displayedCategories, setDisplayedCategories] = useState<TechCategory[]>([]);
@@ -135,11 +137,34 @@ const TechStack: FC<TechStackProps> = ({
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [typedCommand, setTypedCommand] = useState('');
   const [showCursor, setShowCursor] = useState(true);
-  const [currentFullCommand, setCurrentFullCommand] = useState('');
-  const [isCommandComplete, setIsCommandComplete] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Cursor blinking effect
+  // Use RAF for smooth animations
+  const requestRef = useRef<number>();
+  const previousTimeRef = useRef<number>();
+
+  const scrollToBottom = useCallback(() => {
+    if (containerRef.current) {
+      requestAnimationFrame(() => {
+        containerRef.current?.scrollTo({
+          top: containerRef.current.scrollHeight,
+          behavior: 'smooth'
+        });
+      });
+    }
+  }, []);
+
+  const handleStart = () => {
+    setIsStarted(true);
+    setDisplayedCategories([]);
+    setCurrentCategoryIndex(0);
+    setCurrentItemIndex(0);
+    setTypedCommand('');
+    setIsTyping(true);
+  };
+
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
@@ -147,135 +172,180 @@ const TechStack: FC<TechStackProps> = ({
     return () => clearInterval(cursorInterval);
   }, []);
 
-  // Scroll to bottom effect
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    scrollToBottom();
+  }, [displayedCategories, typedCommand, scrollToBottom]);
+
+  useEffect(() => {
+    if (!isStarted || !isTyping) return;
+
+    const currentItem = effectiveCategories[currentCategoryIndex]?.items[currentItemIndex];
+    if (!currentItem) {
+      setIsTyping(false);
+      return;
     }
-  }, [displayedCategories, typedCommand]);
 
-  useEffect(() => {
-    // If no categories or we've displayed all categories, stop
-    if (effectiveCategories.length === 0 || currentCategoryIndex >= effectiveCategories.length) return;
-
-    // If we've displayed all items in current category, stop
-    if (currentItemIndex >= effectiveCategories[currentCategoryIndex].items.length) return;
-
-    // Get current item being processed
-    const currentItem = effectiveCategories[currentCategoryIndex].items[currentItemIndex];
-    
-    // If no typed command or command is not complete, type the command
     if (typedCommand.length < currentItem.command.length) {
       const timer = setTimeout(() => {
         setTypedCommand(currentItem.command.slice(0, typedCommand.length + 1));
-        setCurrentFullCommand(currentItem.command);
       }, typingSpeed);
       return () => clearTimeout(timer);
     }
 
-    // Once command is fully typed, wait and then add to displayed categories
-    if (!isCommandComplete) {
-      const timer = setTimeout(() => {
-        setIsCommandComplete(true);
-        setDisplayedCategories(prev => {
-          const newCategories = [...prev];
-          if (!newCategories[currentCategoryIndex]) {
-            newCategories[currentCategoryIndex] = {
-              title: effectiveCategories[currentCategoryIndex].title,
-              items: []
-            };
-          }
-          newCategories[currentCategoryIndex].items.push({
-            ...effectiveCategories[currentCategoryIndex].items[currentItemIndex],
+    const timer = setTimeout(() => {
+      // Add to displayed categories
+      setDisplayedCategories(prev => {
+        const newCategories = [...prev];
+        if (!newCategories[currentCategoryIndex]) {
+          newCategories[currentCategoryIndex] = {
+            title: effectiveCategories[currentCategoryIndex].title,
+            items: []
+          };
+        }
+      
+        const currentItems = newCategories[currentCategoryIndex].items;
+        if (!currentItems.some(item => item.command === currentItem.fullText)) {
+          currentItems.push({
+            ...currentItem,
             command: currentItem.fullText
           });
-          return newCategories;
-        });
-      }, delayBetweenCategories);
-      return () => clearTimeout(timer);
-    }
-
-    // Move to next item or category
-    if (isCommandComplete) {
-      const timer = setTimeout(() => {
-        // Reset for next item
-        setTypedCommand('');
-        setIsCommandComplete(false);
-        
-        // Move to next item or category
-        if (currentItemIndex + 1 < effectiveCategories[currentCategoryIndex].items.length) {
-          setCurrentItemIndex(prev => prev + 1);
-        } else {
-          // Move to next category
-          setCurrentCategoryIndex(prev => prev + 1);
-          setCurrentItemIndex(0);
         }
-      }, delayBetweenCategories);
-      return () => clearTimeout(timer);
-    }
+      
+        return newCategories;
+      });
+
+      // Clear typed command and prepare for next item
+      setTypedCommand('');
+      
+      // Move to next item or category
+      if (currentItemIndex + 1 < effectiveCategories[currentCategoryIndex].items.length) {
+        setCurrentItemIndex(prev => prev + 1);
+      } else if (currentCategoryIndex + 1 < effectiveCategories.length) {
+        setCurrentCategoryIndex(prev => prev + 1);
+        setCurrentItemIndex(0);
+      } else {
+        setIsTyping(false);
+      }
+    }, delayBetweenCategories);
+
+    return () => clearTimeout(timer);
   }, [
-    effectiveCategories, 
-    currentCategoryIndex, 
-    currentItemIndex, 
-    typedCommand, 
-    isCommandComplete, 
-    typingSpeed, 
-    delayBetweenCategories
+    effectiveCategories,
+    currentCategoryIndex,
+    currentItemIndex,
+    typedCommand,
+    typingSpeed,
+    delayBetweenCategories,
+    isStarted,
+    isTyping
   ]);
 
-  // If no categories, show a placeholder
-  if (effectiveCategories.length === 0) {
-    return (
-      <div className="w-full md:w-1/2 p-2 inline">
-        <div className="mockup-code">
-          <pre data-prefix="$"><code>No tech stack defined</code></pre>
-        </div>
-      </div>
-    );
-  }
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+    };
+  }, []);
+
+  const isComplete = !isTyping && currentCategoryIndex >= effectiveCategories.length;
 
   return (
-    <div 
-      ref={containerRef}
-      className="w-full md:w-3/4 mx-auto p-2 max-h-[600px] overflow-y-auto"
-    >
-      <div className="mockup-code p-4">
-        {/* Terminal header */}
-        <div className="text-sm text-base-content opacity-50 mb-2">
-          💻 Tech Stack Installer | v1.0.0
-        </div>
+    <div className="w-full flex flex-col items-center justify-start p-4">
+      <div 
+        ref={containerRef}
+        className={`w-full max-w-3xl transition-all duration-300 ease-in-out ${
+          isStarted ? 'min-h-[200px]' : 'min-h-0'
+        } ${className || ''}`}
+        style={{
+          height: isStarted ? 'auto' : '60px',
+          overflow: 'hidden'
+        }}
+        role="region"
+        aria-label="Tech Stack Installation Terminal"
+      >
+        {!isStarted ? (
+          <button 
+            onClick={handleStart}
+            className="btn btn-primary glass w-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-primary/20 bg-primary text-primary-content"
+          >
+            Load The Stack
+          </button>
+        ) : (
+          <div className="mockup-terminal bg-neutral text-neutral-content shadow-xl">
+            {/* Terminal header */}
+            <div className="flex items-center justify-between p-2 bg-neutral-900 border-b border-neutral-700">
+              <div className="text-sm truncate">Tech Stack Installer v1.0.0</div>
+              {isComplete && (
+                <div className="bg-success text-success-content px-2 py-1 text-xs rounded ml-2 whitespace-nowrap">
+                  Installation Complete
+                </div>
+              )}
+            </div>
 
-        {/* Title */}
-        <div className="mb-4">
-          <h1 className="text-xl font-bold text-primary">🚀 Our Tech Ecosystem</h1>
-        </div>
+            <div className="p-4 overflow-x-hidden">
+              {/* Title */}
+              <div className="mb-6">
+                <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2 break-words">
+                  <span className="text-error shrink-0">💻</span> 
+                  <span className="break-words">Technologies</span>
+                </h1>
+              </div>
 
-        {/* Displayed categories */}
-        {displayedCategories.map((category, categoryIdx) => (
-          <div key={categoryIdx} className="mb-4">
-            <h2 className="text-lg font-bold text-secondary mb-2">{category.title}</h2>
-            {category.items.map((item, itemIdx) => (
-              <pre 
-                key={itemIdx} 
-                data-prefix={item.prefix} 
-                className="text-base-content"
-              >
-                <code>{item.command}</code>
-              </pre>
-            ))}
-          </div>
-        ))}
+              {/* Displayed categories */}
+              <div className="space-y-6">
+                {displayedCategories.map((category, categoryIdx) => (
+                  <div 
+                    key={categoryIdx} 
+                    className="space-y-3"
+                    role="region"
+                    aria-label={`Category: ${category.title}`}
+                  >
+                    <h2 className="text-base sm:text-lg font-bold text-primary-content break-words">
+                      {category.title}
+                    </h2>
+                    <div className="space-y-2">
+                      {category.items.map((item, itemIdx) => (
+                        <pre 
+                          key={itemIdx} 
+                          className="flex items-start gap-2 text-sm break-words whitespace-pre-wrap"
+                        >
+                          <span className="text-primary shrink-0">{item.prefix}</span>
+                          <code className="flex-1 min-w-0">{item.command}</code>
+                        </pre>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-        {/* Current typing line */}
-        {currentCategoryIndex < effectiveCategories.length && (
-          <div className="flex">
-            <pre data-prefix="➜" className="flex-grow">
-              <code>
-                {typedCommand}
-                {showCursor && currentItemIndex < effectiveCategories[currentCategoryIndex].items.length ? 
-                  <span className="animate-pulse">|</span> : null}
-              </code>
-            </pre>
+              {/* Current typing line */}
+              {isTyping && (
+                <div 
+                  className="flex items-start gap-2 text-sm mt-4"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <span className="text-primary shrink-0">➜</span>
+                  <code className="flex-1 min-w-0 break-words whitespace-pre-wrap">
+                    {typedCommand}
+                    {showCursor && <span className="animate-pulse">|</span>}
+                  </code>
+                </div>
+              )}
+
+              {isComplete && (
+                <div className="mt-4">
+                  <button 
+                    onClick={handleStart}
+                    className="btn btn-primary glass shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-primary/20"
+                  >
+                    Reload Stack
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -284,3 +354,4 @@ const TechStack: FC<TechStackProps> = ({
 };
 
 export default TechStack;
+

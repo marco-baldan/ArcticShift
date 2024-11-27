@@ -91,7 +91,10 @@ export default function WebDevelopmentPage() {
             link2="/blog"
         />
         <FeaturesSection features={featuresList} />
+        <section>
+        <h2 className="text-3xl font-bold text-primary mb-8">🚀 Our Tech Ecosystem</h2>
         <TechStack />
+        </section>
         <PortfolioGallery projects={projects}/>
         <CTA />
         </div>
