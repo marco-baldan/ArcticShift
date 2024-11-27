@@ -134,39 +134,7 @@ const services = [
     }
   }
 ]
-  const categories = [
-    {
-      title: "Our Tech Stack",
-      items: [
-        { prefix: "🚀", name: "Next.js" },
-        { prefix: "⚛️", name: "React.js" },
-        { prefix: "🌐", name: "Express.js" },
-        { prefix: "🖥️", name: "Node.js" },
-        { prefix: "🐍", name: "Python" },
-        { prefix: "☁️", name: "AWS" },
-        { prefix: "☁️", name: "Google Cloud" },
-        { prefix: "📊", name: "MongoDB" },
-      ],
-    },
-    {
-      title: "Content Platforms",
-      items: [
-        { prefix: "🌐", name: "WordPress" },
-        { prefix: "🛒", name: "Shopify" },
-        { prefix: "📄", name: "Contentful" },
-        { prefix: "💻", name: "Webflow" },
-      ],
-    },
-    {
-      title: "Marketing & Creative Tools",
-      items: [
-        { prefix: "📈", name: "HubSpot & CRM Integrations" },
-        { prefix: "📈", name: "Google Analytics & SEO Tools" },
-        { prefix: "💼", name: "Marketing Automation" },
-        { prefix: "🎨", name: "Adobe Creative Suite" },
-      ],
-    },
-  ];
+  
   const featureWithButtonList = [
     {
       icon: <FaDesktop />,
@@ -298,8 +266,7 @@ return(
     />
       <ProcessSection title="Our Process"
         steps={processSteps} />
-      <TechStack
-      categories={categories} />
+      <TechStack />
         <FeaturesSection 
         features={featuresList} 
         title="Our Features" 
