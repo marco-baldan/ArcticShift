@@ -1,51 +1,65 @@
-import React from 'react'
-import { Check, X } from 'lucide-react'
+import React from "react";
+import { Check, X } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 interface Service {
-  name: string
+  name: string;
   features: {
-    [key: string]: boolean
-  }
+    [key: string]: boolean;
+  };
 }
 
 interface ServiceComparisonProps {
-  services: Service[]
+  services: Service[];
 }
 
-export const ServiceComparison: React.FC<ServiceComparisonProps> = ({ services }) => {
+export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
+  services,
+}) => {
   const allFeatures = Array.from(
-    new Set(services.flatMap(service => Object.keys(service.features)))
-  )
+    new Set(services.flatMap((service) => Object.keys(service.features)))
+  );
 
   return (
     <div className="overflow-x-auto">
-      <table className="table w-full">
-        <thead>
-          <tr>
-            <th className="bg-base-200">Feature</th>
-            {services.map(service => (
-              <th key={service.name} className="bg-base-200 text-center">{service.name}</th>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="bg-muted">Feature</TableHead>
+            {services.map((service) => (
+              <TableHead key={service.name} className="bg-muted text-center">
+                {service.name}
+              </TableHead>
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {allFeatures.map(feature => (
-            <tr key={feature}>
-              <td className="font-medium">{feature}</td>
-              {services.map(service => (
-                <td key={`${service.name}-${feature}`} className="text-center">
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {allFeatures.map((feature) => (
+            <TableRow key={feature}>
+              <TableCell className="font-medium">{feature}</TableCell>
+              {services.map((service) => (
+                <TableCell
+                  key={`${service.name}-${feature}`}
+                  className="text-center"
+                >
                   {service.features[feature] ? (
                     <Check className="inline-block text-success" />
                   ) : (
-                    <X className="inline-block text-error" />
+                    <X className="inline-block text-destructive" />
                   )}
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
-  )
-}
-
+  );
+};

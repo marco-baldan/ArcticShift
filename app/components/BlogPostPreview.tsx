@@ -1,13 +1,15 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from "next/link";
+import Image from "next/image";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface BlogPostPreviewProps {
-  slug: string
-  title: string
-  excerpt: string
-  date: string
-  author: string
-  coverImage: string
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: string;
+  coverImage: string;
 }
 
 export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({
@@ -16,26 +18,33 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({
   excerpt,
   date,
   author,
-  coverImage
+  coverImage,
 }) => {
   return (
-    <div className="card bg-base-100 shadow-xl">
-      <figure>
-        <Image src={coverImage} alt={title} width={400} height={250} className="w-full h-64 object-cover" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{title}</h2>
-        <p>{excerpt}</p>
-        <div className="flex justify-between items-center mt-4">
-          <div className="text-sm text-base-content/70">
-            <span>{date}</span> • <span>{author}</span>
+    <Card>
+      <CardContent className="p-0">
+        <Image
+          src={coverImage}
+          alt={title}
+          width={400}
+          height={250}
+          className="w-full h-64 object-cover"
+        />
+        <div className="p-6">
+          <h2 className="text-2xl font-semibold mb-2">{title}</h2>
+          <p className="text-muted-foreground mb-4">{excerpt}</p>
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-muted-foreground">
+              <span>{date}</span> • <span>{author}</span>
+            </div>
           </div>
-          <Link href={`/blog/${slug}`} className="btn btn-primary">
-            Read More
-          </Link>
         </div>
-      </div>
-    </div>
-  )
-}
-
+      </CardContent>
+      <CardFooter>
+        <Button asChild className="w-full">
+          <Link href={`/blog/${slug}`}>Read More</Link>
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+};

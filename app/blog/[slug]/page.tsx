@@ -88,7 +88,7 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
     "nextjs-seo-strategies": {
       title: "Next.js SEO Strategies for Lightning-Fast Websites",
       content: `
-        <p>Next.js combines performance with SEO best practices. Here’s how you can use it to optimise your website:</p>
+        <p>Next.js combines performance with SEO best practices. Here's how you can use it to optimise your website:</p>
         <ul>
           <li>Leverage server-side rendering to improve crawlability</li>
           <li>Use dynamic routing for seamless navigation</li>
@@ -106,13 +106,61 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(posts[slug] || null);
-    }, 500); // Simulated delay
+    }, 500);
   });
 };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  // Resolve the `params` Promise
+  const resolvedParams = await params;
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params; // Awaiting params before accessing 'slug'
-  const post = await getBlogPost(slug);
+  // Fetch the blog post data
+  const post = await getBlogPost(resolvedParams.slug);
+
+  // Return default metadata for not found posts
+  if (!post) {
+    return {
+      title: "Post Not Found - Our Blog",
+      description: "The blog post you're looking for does not exist.",
+    };
+  }
+
+  // Return metadata based on the blog post
+  return {
+    title: `${post.title} - Our Blog`,
+    description: post.content.substring(0, 150),
+    openGraph: {
+      title: post.title,
+      description: post.content.substring(0, 150),
+      url: `https://designbath.co.uk/blog/${resolvedParams.slug}`,
+      images: [
+        {
+          url: post.coverImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.content.substring(0, 150),
+      images: [post.coverImage],
+    },
+  };
+}
+
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params;
+  const post = await getBlogPost(resolvedParams.slug);
 
   if (!post) {
     return notFound();
@@ -123,12 +171,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       <Breadcrumbs
         items={[
           { label: "Blog", href: "/blog" },
-          { label: post.title, href: `/blog/${slug}` },
+          { label: post.title, href: `/blog/${resolvedParams.slug}` },
         ]}
       />
       <article className="mt-8">
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <div className="text-sm text-base-content/70 mb-6">
+        <h1 className="text-4xl font-bold mb-4 text-primary">{post.title}</h1>
+        <div className="text-sm text-muted-foreground mb-6">
           <span>{post.date}</span> • <span>{post.author}</span>
         </div>
         <Image
@@ -140,9 +188,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           priority
         />
         <div
-          className="prose lg:prose-xl"
+          className="prose lg:prose-xl dark:prose-invert"
           dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+        ></div>
       </article>
     </div>
   );

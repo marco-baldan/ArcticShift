@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import { ThemeProvider } from "./components/Themeprovider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "ArcticShift",
-  description: "Digital Experts",
+  title: "designBath.",
+  description: "Web Designers in Bath",
 };
 
 export default function RootLayout({
@@ -30,9 +31,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       <NavBar />
-       <main> {children}</main>
-       <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NavBar />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
