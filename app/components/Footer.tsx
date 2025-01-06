@@ -13,10 +13,10 @@ const Footer = () => {
             href="/"
             className="flex items-center text-xl font-bold text-primary"
           >
-            <Bath className="mr-2 text-primary" /> designbath.
+            <Bath className="mr-2 text-primary" /> designBath.
           </Link>
           <p className="mt-2 text-muted-foreground">
-            designbath <br />
+            designBath. <br />
             Providing Tech Solutions
           </p>
           <div className="flex space-x-4 mt-4">

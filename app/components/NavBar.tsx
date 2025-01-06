@@ -88,7 +88,7 @@ const NavBar = () => {
             <Bath className="h-8 w-8 text-primary" aria-label="Logo" />
             <div className="flex flex-col">
               <span className="text-xl font-bold text-primary">
-                designbath.
+                designBath.
               </span>
               <div className="h-5 relative overflow-hidden">
                 {subtitles.map((subtitle, index) => (
@@ -189,7 +189,7 @@ const NavBar = () => {
             </SheetTrigger>
             <SheetContent side="top" className="w-full h-[100vh] pt-20">
               <SheetHeader>
-                <SheetTitle>designbath.</SheetTitle>
+                <SheetTitle>designBath.</SheetTitle>
                 <SheetDescription />
               </SheetHeader>
               <div className="grid gap-6 text-center">

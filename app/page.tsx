@@ -6,10 +6,10 @@ import { CTA } from "./components/CTA";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "designbath.",
+  title: "designBath.",
   description: "Web Designers in Bath",
   openGraph: {
-    title: "designbath.",
+    title: "designBath.",
     description: "Web Designers in Bath",
     url: "https://www.designbath.co.uk",
     type: "website",
@@ -18,16 +18,16 @@ export const metadata: Metadata = {
         url: "https://www.designbath.co.uk/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "designbath. - Web Designers in Bath",
+        alt: "designBath. - Web Designers in Bath",
       },
     ],
-    siteName: "designbath",
+    siteName: "designBath",
     locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@designbath",
-    creator: "@designbath",
+    site: "@designBath",
+    creator: "@designBath",
   },
 };
 
@@ -73,7 +73,7 @@ export default function Home() {
         <HeroType2
           src="/images/hero1.jpg"
           alt="Hero background"
-          h1text="Welcome to designbath."
+          h1text="Welcome to designBath."
           ptext="Elevating your digital presence with bespoke web solutions. Let us help you create meaningful connections online."
           btntext="Get in Touch"
         />
