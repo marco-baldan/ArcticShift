@@ -11,14 +11,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "designbath.",
     description: "Web Designers in Bath",
-    url: "https://www.designbath.com",
+    url: "https://www.designbath.co.uk",
     type: "website",
     images: [
       {
-        url: "https://www.designbath.com/images/og-image.jpg",
+        url: "https://www.designbath.co.uk/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Design Bath - Web Designers in Bath",
+        alt: "designbath. - Web Designers in Bath",
       },
     ],
     siteName: "designbath",
@@ -35,17 +35,17 @@ export default function Home() {
   const featureWithButtonList = [
     {
       icon: <FaDesktop />,
-      title: "Professional Web Design",
+      title: "Professional Website Design",
       description:
-        "Crafting modern, responsive, and user-focused websites that drive engagement and conversions.",
+        "Designing sleek, responsive, and user-centred websites that enhance engagement and drive results.",
       buttonText: "Learn More",
       buttonLink: "/services/web-design",
     },
     {
       icon: <FaSearch />,
-      title: "Search Engine Optimization (SEO)",
+      title: "Search Engine Optimisation (SEO)",
       description:
-        "Boosting your online visibility and search rankings to reach the right audience effectively.",
+        "Improving your online presence and search rankings to connect with your target audience effectively.",
       buttonText: "Learn More",
       buttonLink: "/services/seo",
     },
@@ -53,15 +53,15 @@ export default function Home() {
       icon: <FaBullhorn />,
       title: "Digital Advertising",
       description:
-        "Creating targeted ad campaigns across Google, social media, and other platforms to grow your reach.",
+        "Developing targeted ad campaigns on Google, social media, and beyond to expand your reach.",
       buttonText: "Learn More",
       buttonLink: "/services/digital-advertising",
     },
     {
       icon: <FaChartLine />,
-      title: "Data-Driven Digital Marketing",
+      title: "Data-Driven Marketing",
       description:
-        "Using data insights to craft personalized marketing strategies that yield measurable results.",
+        "Leveraging data insights to create bespoke marketing strategies that deliver tangible outcomes.",
       buttonText: "Learn More",
       buttonLink: "/services/digital-marketing",
     },
@@ -73,15 +73,17 @@ export default function Home() {
         <HeroType2
           src="/images/hero1.jpg"
           alt="Hero background"
-          h1text="Hello there"
-          ptext="Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."
+          h1text="Welcome to designbath."
+          ptext="Elevating your digital presence with bespoke web solutions. Let us help you create meaningful connections online."
           btntext="Get in Touch"
         />
+
         <FeaturesSectionWithButton
           features={featureWithButtonList}
-          title="Our Features"
-          description="We provide cutting-edge features to bring the best user experience."
+          title="What We Offer"
+          description="Explore our tailored services designed to elevate your digital presence and deliver exceptional results."
         />
+
         <DynamicTestimonials />
         <CTA />
       </main>

@@ -7,6 +7,7 @@ interface AnimatedCounterProps {
   duration: number;
   prefix?: string;
   suffix?: string;
+  label?: string;
 }
 
 export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
@@ -14,6 +15,7 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   duration,
   prefix = "",
   suffix = "",
+  label = "",
 }) => {
   const [count, setCount] = useState(0);
 
@@ -31,10 +33,15 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   }, [end, duration]);
 
   return (
-    <div className="text-4xl font-bold text-primary">
-      {prefix}
-      {count.toLocaleString()}
-      {suffix}
+    <div className="flex flex-col items-center text-center space-y-2">
+      <div className="text-4xl font-bold text-primary">
+        {prefix}
+        {count.toLocaleString()}
+        {suffix}
+      </div>
+      {label && (
+        <div className="text-sm font-medium text-muted-foreground">{label}</div>
+      )}
     </div>
   );
 };

@@ -16,9 +16,9 @@ type ContactInfo = {
 };
 
 const contactInfo: ContactInfo = {
-  email: "contact@example.com",
-  phone: "123-456-7890",
-  address: "123 Main St, Anytown, USA",
+  email: "marco@designbath.co.uk",
+  phone: "+44 7577717604",
+  address: "Bath, UK",
 };
 
 export default function ContactPage() {
@@ -196,7 +196,7 @@ export default function ContactPage() {
         </p>
         <div
           className="calendly-inline-widget"
-          data-url="https://calendly.com/marco-baldan98"
+          data-url="https://calendly.com/marco-designbath"
           data-hide_event_type_details="1"
           style={{ minWidth: "320px", height: "700px" }}
         ></div>

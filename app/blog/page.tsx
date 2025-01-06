@@ -16,44 +16,43 @@ const blogPosts: BlogPostPreviewData[] = [
     slug: "getting-started-with-nextjs",
     title: "Getting Started with Next.js",
     excerpt:
-      "Learn how to build fast and efficient web applications with Next.js, the React framework for production.",
+      "Learn to build fast, efficient web apps using Next.js, the go-to React framework.",
     date: "2023-03-10",
     author: "Marco Baldan",
     coverImage: "/images/hero1.jpg?height=250&width=400",
   },
   {
     slug: "wordpress-vs-shopify",
-    title:
-      "WordPress vs Shopify: Choosing the Right Platform for Your Business",
+    title: "WordPress vs Shopify: Choosing the Right Platform",
     excerpt:
-      "Explore the pros and cons of WordPress and Shopify to decide which is best for your e-commerce needs.",
+      "Compare WordPress and Shopify to find the best platform for your business needs.",
     date: "2023-04-05",
     author: "Marco Baldan",
     coverImage: "/images/hero1.jpg?height=250&width=400",
   },
   {
     slug: "top-5-seo-tips",
-    title: "Top 5 SEO Tips to Boost Your Website Rankings in 2023",
+    title: "Top 5 SEO Tips to Boost Your Rankings in 2023",
     excerpt:
-      "Uncover actionable SEO strategies that will help your site rank higher in search engine results.",
+      "Discover actionable SEO tips to enhance your site’s visibility and performance.",
     date: "2023-02-20",
     author: "Marco Baldan",
     coverImage: "/images/hero1.jpg?height=250&width=400",
   },
   {
     slug: "maximising-conversions-digital-marketing",
-    title: "Maximising Conversions with Digital Marketing in 2023",
+    title: "Maximising Conversions with Digital Marketing",
     excerpt:
-      "Learn how to optimise your digital marketing campaigns to drive traffic and convert visitors into customers.",
+      "Optimise campaigns to drive traffic and convert visitors into loyal customers.",
     date: "2023-01-15",
     author: "Marco Baldan",
     coverImage: "/images/hero1.jpg?height=250&width=400",
   },
   {
     slug: "nextjs-seo-strategies",
-    title: "Next.js SEO Strategies for Lightning-Fast Websites",
+    title: "Next.js SEO Strategies for High Rankings",
     excerpt:
-      "Discover how Next.js enhances SEO and helps you achieve better rankings with its modern features.",
+      "Learn how Next.js improves SEO with modern features and lightning-fast performance.",
     date: "2023-03-28",
     author: "Marco Baldan",
     coverImage: "/images/hero1.jpg?height=250&width=400",

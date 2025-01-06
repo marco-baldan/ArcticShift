@@ -9,57 +9,54 @@ const techStack = [
     title: "Core Technologies",
     items: [
       {
-        prefix: "➜",
+        prefix: "</>",
         command: "install next.js",
         fullText:
-          "🚀 Next.js - Advanced React framework for production-grade web applications",
+          "🚀 Next.js - The React framework for scalable web applications.",
       },
       {
-        prefix: "➜",
+        prefix: "</>",
         command: "install react.js",
         fullText:
-          "⚛️ React.js - Declarative, efficient, and flexible JavaScript library for building UIs",
+          "⚛️ React.js - A powerful library for building user interfaces.",
       },
       {
-        prefix: "➜",
+        prefix: "</>",
         command: "install express.js",
         fullText:
-          "🌐 Express.js - Minimal and flexible Node.js web application framework",
+          "🌐 Express.js - Minimal and flexible framework for Node.js apps.",
       },
       {
-        prefix: "➜",
+        prefix: "</>",
         command: "install node.js",
         fullText:
-          "🖥️ Node.js - JavaScript runtime built on Chrome's V8 JavaScript engine",
+          "🖥️ Node.js - JavaScript runtime for fast, scalable backends.",
       },
       {
-        prefix: "➜",
+        prefix: "</>",
         command: "install python",
         fullText:
-          "🐍 Python - High-level, interpreted programming language for versatile development",
+          "🐍 Python - Versatile language for web, data, and AI projects.",
       },
     ],
   },
   {
-    title: "☁️ Cloud & Database",
+    title: "☁️ Cloud & Databases",
     items: [
       {
         prefix: "➜",
         command: "install aws",
-        fullText:
-          "☁️ AWS - Comprehensive cloud computing platform with extensive services",
+        fullText: "☁️ AWS - Reliable cloud platform for hosting and services.",
       },
       {
         prefix: "➜",
         command: "install google-cloud",
-        fullText:
-          "☁️ Google Cloud - Scalable cloud computing services with advanced machine learning capabilities",
+        fullText: "☁️ Google Cloud - Scalable cloud services with AI tools.",
       },
       {
         prefix: "➜",
         command: "install mongodb",
-        fullText:
-          "📊 MongoDB - Flexible, scalable NoSQL database for modern applications",
+        fullText: "📊 MongoDB - NoSQL database for modern, flexible apps.",
       },
     ],
   },
@@ -69,26 +66,22 @@ const techStack = [
       {
         prefix: "➜",
         command: "install wordpress",
-        fullText:
-          "🌐 WordPress - Popular content management system and website builder",
+        fullText: "🌐 WordPress - Popular CMS for blogs and websites.",
       },
       {
         prefix: "➜",
         command: "install shopify",
-        fullText:
-          "🛒 Shopify - E-commerce platform for online stores and retail point of sale",
+        fullText: "🛒 Shopify - Leading platform for e-commerce businesses.",
       },
       {
         prefix: "➜",
         command: "install contentful",
-        fullText:
-          "📄 Contentful - Headless CMS for omnichannel content management",
+        fullText: "📄 Contentful - Headless CMS for multi-channel content.",
       },
       {
         prefix: "➜",
         command: "install webflow",
-        fullText:
-          "💻 Webflow - Visual web design tool with powerful CMS capabilities",
+        fullText: "💻 Webflow - Visual design tool with integrated CMS.",
       },
     ],
   },
@@ -98,26 +91,23 @@ const techStack = [
       {
         prefix: "➜",
         command: "install hubspot-crm",
-        fullText:
-          "📈 HubSpot & CRM Integrations - Comprehensive marketing, sales, and customer service platform",
+        fullText: "📈 HubSpot - All-in-one CRM for marketing and sales.",
       },
       {
         prefix: "➜",
         command: "install analytics-seo",
-        fullText:
-          "📈 Google Analytics & SEO Tools - Advanced web analytics and search engine optimization tools",
+        fullText: "📈 Google Analytics - Advanced tools for SEO insights.",
       },
       {
         prefix: "➜",
         command: "install marketing-automation",
         fullText:
-          "💼 Marketing Automation - Streamlined marketing processes and personalized customer journeys",
+          "💼 Marketing Automation - Streamlined workflows and analytics.",
       },
       {
         prefix: "➜",
         command: "install adobe-creative-suite",
-        fullText:
-          "🎨 Adobe Creative Suite - Professional-grade creative and design software",
+        fullText: "🎨 Adobe Suite - Industry-standard creative design tools.",
       },
     ],
   },
@@ -143,8 +133,8 @@ interface TechStackProps {
 
 const TechStack: FC<TechStackProps> = ({
   categories = [],
-  typingSpeed = 50,
-  delayBetweenCategories = 1000,
+  typingSpeed = 40,
+  delayBetweenCategories = 250,
   className,
 }) => {
   const effectiveCategories = categories.length > 0 ? categories : techStack;
